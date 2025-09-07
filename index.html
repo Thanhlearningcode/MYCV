@@ -203,7 +203,8 @@
         <div class="navlinks" role="navigation">
           <a href="#home" data-link>Home</a>
           <a href="#projects" data-link>Projects</a>
-          <a href="#about" data-link>About</a>
+          <a href="#about" data-link>About<\/a>
+          <a href="#education" data-link>Education<\/a>
           <a href="#connect" data-link>Contact</a>
           <button id="langBtn" class="lang-toggle" aria-label="Language toggle">VI</button>
         </div>
@@ -263,11 +264,18 @@
             <p id="aboutP2">I enjoy building with FreeRTOS, Rust (Embassy), and modern C/C++ on ESP32. Lately, I'm exploring MQTT, OTA updates, and energy-efficient designs.</p>
           </div>
           <div class="card pad">
-            <div class="section-title" style="margin-top:0">Experience</div>
-            <div class="timeline">
+            $1
               <div class="titem">
-                $12025$2
+                <h4>D‑SOFT — Embedded Linux/C++ Intern</h4>
+                <div class="tmeta">2025</div>
                 <div>Worked on Embedded Linux, tooling, and performance tweaks; collaborated via Git and CI.</div>
+              </div>
+              <div class="titem">
+                <h4>BKTECH Lab — Virtual STM32 & Custom RTOS</h4>
+                <div class="tmeta">2023–2024</div>
+                <div>Built a virtual MCU platform, device drivers, and a lightweight preemptive RTOS for STM32.</div>
+              </div>
+            $2
               </div>
               <div class="titem">
                 <h4>BKTECH Lab — Virtual STM32 & Custom RTOS</h4>
@@ -300,6 +308,40 @@
           <div class="card pad">
             <div class="tmeta">Education Classification</div>
             <div>Khá (Good)</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EDUCATION -->
+      <section id="education" class="reveal">
+        <div class="section-title">Education</div>
+        <div class="card pad">
+          <div class="timeline">
+            <div class="titem">
+              <h4>Da Nang University of Science and Technology</h4>
+              <div class="tmeta">2021–2026</div>
+              <div>Mechatronics Engineering — <strong>Good (Khá)</strong>. Degree: <em>B.Eng., Bachelor of Engineering</em>.</div>
+            </div>
+            <div class="titem">
+              <h4>HALA ACADEMY</h4>
+              <div class="tmeta">07/2024 – 12/2024</div>
+              <div>Automotive.</div>
+            </div>
+            <div class="titem">
+              <h4>DEVLINUX ACADEMY</h4>
+              <div class="tmeta">11/2024 – 12/2025</div>
+              <div>Linux Embedded, S32K‑MCU.</div>
+            </div>
+            <div class="titem">
+              <h4>HOME ENGLISH</h4>
+              <div class="tmeta">07/2024 – 05/2025</div>
+              <div>B1 / Pre‑B2 Communication.</div>
+            </div>
+            <div class="titem">
+              <h4>KOHI</h4>
+              <div class="tmeta">09/2025 – 02/2026</div>
+              <div>N4.</div>
+            </div>
           </div>
         </div>
       </section>
@@ -538,9 +580,11 @@
         document.querySelector('nav .navlinks a[href="#home"]').textContent = s.home;
         document.querySelector('nav .navlinks a[href="#about"]').textContent = s.about.replace('Me','');
         document.querySelector('nav .navlinks a[href="#projects"]').textContent = (lang==='vi') ? 'Dự án' : 'Projects';
+        const eduAnchor = document.querySelector('nav .navlinks a[href="#education"]'); if(eduAnchor) eduAnchor.textContent = (lang==='vi') ? 'Học vấn' : 'Education';
         document.querySelector('nav .navlinks a[href="#connect"]').textContent = (lang==='vi') ? 'Liên hệ' : 'Contact';
         document.querySelector('#about .section-title').textContent = s.about;
         document.querySelector('#projects .section-title').textContent = s.feat;
+        const eduTitle = document.querySelector('#education .section-title'); if(eduTitle) eduTitle.textContent = (lang==='vi') ? 'Học vấn' : 'Education';
         document.querySelector('#connect .section-title').textContent = s.connect;
         const iAm = document.getElementById('iAm'); if(iAm) iAm.textContent = s.heroPrefix;
         document.getElementById('langBtn').textContent = lang.toUpperCase();
