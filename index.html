@@ -81,8 +81,8 @@
       .avatar .ring{width:min(240px,40vw); aspect-ratio:1/1; border-radius:50%;
         background:linear-gradient(135deg,rgba(114,186,255,.22),rgba(124,243,200,.12)); padding:6px; box-shadow:0 8px 28px rgba(0,0,0,.35);} 
       .avatar .inner{width:100%; height:100%; border-radius:50%; background:linear-gradient(180deg,#09152c,#0c1a36);
-        display:grid; place-items:center; border:1px solid var(--border)}
-      .avatar .photo{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:50%; display:block; filter:saturate(1.05) contrast(1.02);}  position:relative; overflow:hidden} 
+        display:grid; place-items:center; border:1px solid var(--border); position:relative; overflow:hidden}
+      .avatar .photo{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:50%; display:block; filter:saturate(1.05) contrast(1.02);}  
       .avatar .initials{font-weight:800; font-size:3.2rem; color:#cfe3ff; letter-spacing:.02em}
       .hero-cta .btn{box-shadow:0 15px 35px rgba(124,243,200,.1)}
 
@@ -188,6 +188,11 @@
       /* Back to top */
       .totop{position:fixed; right:16px; bottom:16px; opacity:0; transform:translateY(10px); transition:.25s; z-index:40}
       .totop.show{opacity:1; transform:translateY(0)}
+      /* === Avatar size fix (prevent oversized image) === */
+      .avatar .inner{clip-path:circle(50% at 50% 50%);} /* hard-clip */
+      .avatar .photo{object-position:center;}
+      .avatar .ring{width:clamp(120px, 17vw, 180px) !important; aspect-ratio:1/1;}
+      @media (max-width:900px){ .avatar .ring{ width:140px !important; } }
     </style>
   </head>
   <body>
