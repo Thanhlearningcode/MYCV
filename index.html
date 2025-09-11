@@ -22,10 +22,148 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
     <style>
-      /* Các style vẫn giữ nguyên */
+      :root{
+        --bg:#0b1730; /* main background */
+        --bg2:#081123; /* gradient base */
+        --card:#0f2244; /* card background */
+        --muted:#9bb0d6; /* secondary text */
+        --text:#eaf2ff; /* primary text */
+        --primary:#7cf3c8; /* mint accent */
+        --accent:#ffd166; /* yellow accent */
+        --highlight:#72baff; /* blue accent */
+        --chip:#1d3566; /* tag chip */
+        --border:rgba(255,255,255,.08);
+        --shadow:0 12px 36px rgba(0,0,0,.35);
+        --radius:18px;
+        --ring:0 0 0 2px rgba(124,243,200,.35);
+      }
+      *{box-sizing:border-box}
+      html{scroll-behavior:smooth; scroll-padding-top:72px}
+      body{margin:0; color:var(--text); font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; background: radial-gradient(80vw 80vw at 10% -10%, rgba(124,243,200,.12), transparent 60%), radial-gradient(90vw 70vw at 110% 10%, rgba(114,186,255,.10), transparent 65%), linear-gradient(180deg,var(--bg),var(--bg2)); min-height:100vh; }
+      a{color:var(--highlight); text-decoration:none}
+      a:hover{opacity:.92}
+      .container{width:min(1200px,94%); margin-inline:auto}
+      /* NAV */
+      nav{position:sticky; top:0; z-index:30; backdrop-filter:blur(10px); background:rgba(8,17,35,.55); border-bottom:1px solid var(--border)}
+      .navwrap{display:flex; align-items:center; justify-content:space-between; padding:.9rem 0}
+      .brand{display:flex; gap:.6rem; align-items:center; font-weight:800}
+      .brand .logo{display:grid; place-items:center; width:28px; height:28px; border-radius:8px; background:linear-gradient(135deg,#22e1ff 0%, #1d8fe1 50%, #625eb1 100%); font-size:.9rem}
+      .navlinks{display:flex; gap:.6rem 1rem; align-items:center}
+      .navlinks a{font-weight:600; color:#d8e6ff; padding:.35rem .6rem; border-radius:999px}
+      .navlinks a.active{background:rgba(255,255,255,.06); box-shadow:var(--ring)}
+      .lang-toggle{border:1px solid var(--border); background:transparent; color:#d8e6ff; border-radius:999px; padding:.35rem .7rem; cursor:pointer}
+      .skip{position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden}
+      .skip:focus{left:12px; top:12px; width:auto; height:auto; padding:.5rem .8rem; background:#0f2244; border-radius:10px}
+      /* HERO */
+      .hero{display:grid; grid-template-columns:1.15fr .85fr; gap:2.1rem; padding:3rem 0 2rem; align-items:center; position:relative}
+      .hero::after{content:""; position:absolute; inset:auto 0 -32px 0; height:2px; background:linear-gradient(90deg,transparent, rgba(124,243,200,.4), transparent)}
+      .eyebrow{color:var(--muted); font-weight:600; letter-spacing:.08em; text-transform:uppercase; font-size:.82rem}
+      h1{font-size:clamp(2rem, 4.8vw, 3.6rem); line-height:1.1; margin:.6rem 0 1rem}
+      .accent-1{color:var(--accent)}
+      .accent-2{color:var(--highlight)}
+      .accent-3{color:var(--primary)}
+      .lead{color:#cfe3ff; font-size:1.06rem; opacity:.95}
+      .avatar{justify-self:end}
+      .avatar .ring{width:min(240px,40vw); aspect-ratio:1/1; border-radius:50%; background:linear-gradient(135deg,rgba(114,186,255,.22),rgba(124,243,200,.12)); padding:6px; box-shadow:0 8px 28px rgba(0,0,0,.35);}
+      .avatar .inner{width:100%; height:100%; border-radius:50%; background:linear-gradient(180deg,#09152c,#0c1a36); display:grid; place-items:center; border:1px solid var(--border); position:relative; overflow:hidden}
+      .avatar .photo{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:50%; display:block; filter:saturate(1.05) contrast(1.02);}
+      .avatar .initials{font-weight:800; font-size:3.2rem; color:#cfe3ff; letter-spacing:.02em}
+      .hero-cta .btn{box-shadow:0 15px 35px rgba(124,243,200,.1)}
+      @keyframes spin{to{transform:rotate(360deg)}}
+      /* Sections */
+      section{margin:2rem 0}
+      .section-title{display:flex; align-items:center; gap:.6rem; font-size:1.05rem; letter-spacing:.08em; text-transform:uppercase; color:#cfe3ff; opacity:.9; margin-bottom:1rem}
+      .section-title::after{content:""; flex:1; height:1px; background:linear-gradient(90deg, rgba(114,186,255,.4), transparent)}
+      .card{background:var(--card); border-radius:var(--radius); border:1px solid var(--border); box-shadow:var(--shadow)}
+      .pad{padding:1.15rem}
+      .grid{display:grid; gap:1rem}
+      .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+      .about p{margin:.45rem 0; color:#d6e5ff; line-height:1.64}
+      /* Stats bar */
+      .stats{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem}
+      .stat{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01)); border:1px solid var(--border); border-radius:16px; padding:1rem; text-align:center}
+      .stat .num{font-size:1.6rem; font-weight:800}
+      .skeleton{position:relative; overflow:hidden}
+      .skeleton::after{content:""; position:absolute; inset:0; background:linear-gradient(90deg, rgba(255,255,255,.03), rgba(255,255,255,.12), rgba(255,255,255,.03)); transform:translateX(-100%); animation:shimmer 1.2s infinite}
+      @keyframes shimmer{to{transform:translateX(100%)}}
+      /* Tech */
+      .tech{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.9rem}
+      .tech .item{display:flex; align-items:center; gap:.8rem; padding:.85rem; border-radius:14px; border:1px solid var(--border); background:linear-gradient(135deg,rgba(114,186,255,.10),rgba(124,243,200,.04)); transition:transform .25s ease, box-shadow .25s ease}
+      .tech .item:hover{transform:translateY(-2px); box-shadow:0 10px 28px rgba(0,0,0,.35), var(--ring)}
+      .tech .icon{width:38px; height:38px; display:grid; place-items:center; border-radius:10px; background:linear-gradient(135deg,rgba(114,186,255,.18),rgba(124,243,200,.14))}
+      .tech .label{font-weight:700}
+      .tech .sub{color:var(--muted); font-size:.88rem}
+      /* Filters */
+      .filters{display:flex; gap:.5rem; flex-wrap:wrap; margin:.6rem 0 1rem}
+      .pill{display:inline-flex; align-items:center; gap:.35rem; padding:.35rem .7rem; border-radius:999px; border:1px solid var(--border); background:rgba(255,255,255,.03); cursor:pointer; font-size:.85rem}
+      .pill.active{background:rgba(255,255,255,.08); box-shadow:var(--ring)}
+      /* Projects */
+      .projects{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem}
+      .project{display:flex; flex-direction:column; gap:.6rem; position:relative; isolation:isolate}
+      .project .cover{height:140px; border-radius:14px; background:linear-gradient(135deg, rgba(114,186,255,.16), rgba(124,243,200,.12)); border:1px solid var(--border); display:grid; place-items:center}
+      .project .cover span{opacity:.9; font-weight:600; color:#dbe6ff}
+      .project::after{content:""; position:absolute; inset:0; border-radius:var(--radius); pointer-events:none; opacity:0; background:radial-gradient(60% 80% at 50% 0%, rgba(124,243,200,.18), transparent 70%); transition:opacity .25s ease}
+      .project:hover::after{opacity:1}
+      .project h3{margin:.2rem 0; font-size:1.06rem}
+      .project p{color:#d6e5ff; line-height:1.55}
+      .chips{display:flex; gap:.4rem; flex-wrap:wrap}
+      .chip{display:inline-flex; align-items:center; gap:.35rem; padding:.24rem .55rem; border-radius:999px; background:var(--chip); color:#cfe3ff; border:1px solid var(--border); font-size:.78rem; box-shadow:inset 0 -1px 0 rgba(255,255,255,.05)}
+      .between{display:flex; align-items:center; justify-content:space-between}
+      .row{display:flex; gap:.6rem; align-items:center; flex-wrap:wrap}
+      .muted{color:var(--muted)}
+      /* Timeline */
+      .timeline{position:relative; margin-top:.5rem}
+      .timeline::before{content:""; position:absolute; left:12px; top:0; bottom:0; width:2px; background:linear-gradient(180deg, rgba(114,186,255,.6), transparent)}
+      .titem{position:relative; padding-left:42px; margin:1rem 0}
+      .titem::before{content:""; position:absolute; left:4px; top:.3rem; width:16px; height:16px; border-radius:50%; background:var(--highlight); box-shadow:0 0 0 4px rgba(114,186,255,.15)}
+      .titem h4{margin:.1rem 0; font-size:1rem}
+      .tmeta{color:var(--muted); font-size:.9rem}
+      /* Buttons */
+      .btn{display:inline-flex; align-items:center; gap:.5rem; padding:.62rem .9rem; border-radius:999px; border:1px solid var(--border); color:#eaf2ff; background:rgba(255,255,255,.03); transition:transform .2s ease, box-shadow .2s ease}
+      .btn:hover{transform:translateY(-1px); box-shadow:var(--ring)}
+      /* Footer */
+      footer{border-top:1px solid var(--border); margin-top:2rem; color:#bcd1ff; opacity:.92}
+      footer .inner{padding:1.2rem 0; font-size:.92rem}
+      /* Toast */
+      .toast{position:fixed; left:50%; bottom:18px; transform:translateX(-50%) translateY(20px); background:#122b57; color:#eaf2ff; border:1px solid var(--border); border-radius:12px; padding:.6rem .9rem; box-shadow:var(--shadow); opacity:0; pointer-events:none; transition:opacity .25s ease, transform .25s ease; z-index:50}
+      .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+      /* Reveal on scroll */
+      .reveal{opacity:0; transform:translateY(10px); transition:opacity .5s ease, transform .5s ease}
+      .reveal.visible{opacity:1; transform:translateY(0)}
+      /* Scrollbar */
+      ::-webkit-scrollbar{width:10px}
+      ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12); border-radius:999px}
+      /* Responsive */
+      @media (max-width: 900px){
+        .hero{grid-template-columns:1fr; gap:1.2rem}
+        .avatar{justify-self:start}
+        .projects{grid-template-columns:1fr}
+        .tech{grid-template-columns:1fr}
+        .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+        .stats{grid-template-columns:1fr}
+      }
+      @media (prefers-reduced-motion: reduce){
+        *{animation:none!important; transition:none!important}
+      }
+      /* Back to top */
+      .totop{position:fixed; right:16px; bottom:16px; opacity:0; transform:translateY(10px); transition:.25s; z-index:40}
+      .totop.show{opacity:1; transform:translateY(0)}
+      /* === Avatar size fix (prevent oversized image) === */
+      .avatar .inner{clip-path:circle(50% at 50% 50%);} /* hard-clip */
+      .avatar .photo{object-position:center;}
+      .avatar .ring{width:clamp(150px, 20vw, 230px) !important; aspect-ratio:1/1;}
+      @media (max-width:900px){ .avatar .ring{ width:180px !important; } }
+      /* Education timeline: hide dots/line */
+      #education .timeline::before{display:none}
+      #education .titem::before{display:none}
+      /* Education timeline: hide bullets/line completely */
+      #education .timeline::before{display:none !important}
+      #education .titem::before{display:none !important}
+      #education .titem{padding-left:0 !important}
     </style>
   </head>
-
   <body>
     <a class="skip" href="#home">Bỏ qua nội dung</a>
     <nav aria-label="Primary">
@@ -34,159 +172,4 @@
         <div class="navlinks" role="navigation">
           <a href="#home" data-link>Home</a>
           <a href="#projects" data-link>Projects</a>
-          <a href="#about" data-link>About</a>
-          <a href="#education" data-link>Education</a>
-          <a href="#connect" data-link>Contact</a>
-          <button id="langBtn" class="lang-toggle" aria-label="Language toggle">VI</button>
-        </div>
-      </div>
-    </nav>
-
-    <main id="home" class="container">
-      <!-- HERO -->
-      <section class="hero reveal">
-        <div>
-          <div class="eyebrow" id="eyebrow">IoT / Embedded</div>
-          <h1 id="headline">
-            <span id="iAm">I'm</span> <span class="accent-1" id="nameAccent">Nguyen Van Thanh</span>, an
-            <span class="accent-2">Embedded Software Engineer</span> building <span class="accent-3">secure</span> devices.
-          </h1>
-          <p class="lead" id="lead">Embedded Software Engineer focusing on Embedded Linux, RTOS/FreeRTOS, and Modern C/C++ (C++11+) on STM32/ESP32/PIC; comfortable with Makefile, CMake, and unit testing (GoogleTest).</p>
-          <div style="margin-top:1rem" class="row hero-cta">
-            <a class="btn" target="_blank" rel="noreferrer" id="ctaGithub" href="#" aria-label="GitHub profile">GitHub</a>
-            <a class="btn" target="_blank" rel="noreferrer" id="ctaLinkedin" href="#" aria-label="LinkedIn profile">LinkedIn</a>
-            <a class="btn" target="_blank" rel="noreferrer" id="ctaResume" href="/resume.pdf">Resume</a>
-            <a class="btn" id="ctaEmail" href="#" data-copy="email" aria-label="Copy email">Email</a>
-          </div>
-        </div>
-        <div class="avatar" aria-hidden>
-          <div class="ring">
-            <div class="inner"><img class="photo" id="avatarPhoto" src="https://raw.githubusercontent.com/Thanhlearningcode/MYCV/main/anh.jpg" alt="Portrait of Nguyễn Văn Thành" onerror="this.style.display='none'; document.getElementById('initials').style.display='grid';"/><div class="initials" id="initials" style="display:none">NVT</div></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PROJECTS -->
-      <section id="projects" class="reveal">
-        <div class="section-title">Featured Projects</div>
-        <div class="filters" id="filters"></div>
-        <div class="projects" id="projectsGrid"></div>
-      </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-      <div class="container inner">Designed & Built by <span id="byName">Nguyen Van Thanh</span> • <span id="year"></span></div>
-    </footer>
-
-    <button class="btn totop" id="toTop" aria-label="Back to top">↑</button>
-    <div class="toast" id="toast" role="status" aria-live="polite">Email copied!</div>
-
-    <!-- React + Babel for JSX -->
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Nguyen Van Thanh",
-        "jobTitle": "Embedded Software Engineer",
-        "url": "https://thanhlearningcode.github.io/",
-        "sameAs": ["https://github.com/Thanhlearningcode", "https://www.linkedin.com/in/thanh76bk/"]
-      }
-    </script>
-
-    <script type="text/babel">
-      // === Editable configuration ===
-      const CONFIG = {
-        name: 'Nguyen Van Thanh',
-        initials: 'NVT',
-        title: 'Embedded Software Engineer',
-        email: 'thanhnguyen67bk@gmail.com',
-        github: 'https://github.com/Thanhlearningcode',
-        linkedin: 'https://www.linkedin.com/in/thanh76bk/',
-        avatar: 'https://raw.githubusercontent.com/Thanhlearningcode/MYCV/main/anh.jpg',
-        resume: '/resume.pdf',
-        hero: 'Proud of my passion for Embedded Systems, skilled in Bare‑metal, Embedded Linux, Automotive Embedded, RTOS, C/C++/Python, and Android Embedded; I\'m confident I\'ll become an expert someday!',
-        about1: 'Mechatronics student at Da Nang University of Science and Technology (2021–2026). Passionate about building reliable, real‑time firmware, driver libraries, and device‑to‑device communications.',
-        about2: 'Hands‑on with SPI, I2C, UART, CAN; Linux IPC (pipes, sockets, message queues); and tools like KeilC, S32DS, Qt. Internship at D‑SOFT (Embedded Linux/C++), Embedded Lab at BKTECH (virtual STM32, custom RTOS).',
-        technologies: [
-          { icon: 'code', label: 'Programming', sub: 'C/C++' },
-          { icon: 'term', label: 'Embedded Linux', sub: 'Yocto, Programming, Modules' },
-          { icon: 'rtos', label: 'RTOS/FreeRTOS', sub: 'Tasks • Queues • Semaphores,...' },
-          { icon: 'chip', label: 'Microcontrollers', sub: 'NXP (i.MX 8M, S32K144), STM32, ESP32, PIC, Raspberry Pi' },
-          { icon: 'mqtt', label: 'Protocols', sub: 'SPI • I2C • UART • CAN' },
-          { icon: 'term', label: 'Debugging & Analysis', sub: 'GDB • AddressSanitizer • Analyzers,...' }
-        ],
-        projects: [
-          {
-            title: 'Virtual STM32 Simulation (ARM Cortex‑M3)',
-            desc: 'Virtual model of STM32 (CPU core, buses, GPIO, DMA, UART/SPI, memory‑mapped registers) enabling firmware tests without hardware; Python test scripts; CI‑friendly.',
-            tags: ['C++','Emulation','Testing'],
-            repo: 'https://github.com/Thanhlearningcode/VirtualPlatformSTM32',
-            cover: '',
-          },
-          {
-            title: 'STM32 Driver Library & Custom RTOS',
-            desc: 'Lightweight preemptive RTOS (scheduler, semaphores, mutexes) and STM32 driver library in C using design patterns; automated build/test with Makefile & Bash.',
-            tags: ['C','RTOS','KeilC'],
-            repo: 'https://github.com/Thanhlearningcode/STM32',
-            cover: '',
-          },
-          {
-            title: 'AGV — Mobile Robot using ROS (PBL)',
-            desc: 'Project lead for 2‑person team; BTS7960 motor driver, encoder feedback, CAN‑based control; real‑time communication with RTOS.',
-            tags: ['Robotics','CAN','STM32','Raspberry Pi'],
-            repo: 'https://github.com/Thanhlearningcode/AGV_MOBILEROBOT',
-            cover: '',
-            video: 'https://www.youtube.com/playlist?list=PLuLSa6UJU-JVPB2FamfjqBzRCuvz32bf4'  // Thêm video link
-          },
-          {
-            title: 'Linux Chat (Pthreads + TCP/IP)',
-            desc: 'Multi‑client chat server and CLI client: concurrent connections via POSIX threads & mutexes, command‑based protocol, thread‑safe messaging; Makefile build; Valgrind checked.',
-            tags: ['Networking','C','Sockets'],
-            repo: 'https://github.com/Thanhlearningcode/Chat-Application_MiniProject',
-            cover: '',
-          },
-          {
-            title: 'SMART PARKING (PIC + C#)',
-            desc: 'RFID‑based authentication with real‑time logging; servo barrier with SPI SD‑card storage; C# monitoring app.',
-            tags: ['PIC','RFID','C#'],
-            repo: 'https://github.com/Thanhlearningcode/SMART-PARKING',
-            cover: '',
-          }
-        ]
-      };
-
-      const ProjectCard = ({ p }) => (
-        <div className="card pad project" data-tags={p.tags.join(',')}>
-          <div className="cover">
-            {p.cover ? <img alt="cover" src={p.cover} style={{maxWidth:'100%',maxHeight:'100%',borderRadius:'12px'}}/> : <span>Project Preview</span>}
-          </div>
-          <div className="between" style={{marginTop:'.5rem'}}>
-            <h3>{p.title}</h3>
-            <div className="row">
-              <a className="btn" href={p.repo} target="_blank" rel="noreferrer" title="GitHub repo">
-                <Icon name="github" /> Repo
-              </a>
-              {p.video && (
-                <a className="btn" href={p.video} target="_blank" rel="noreferrer" title="Watch Video">
-                  <Icon name="link" /> Video
-                </a>
-              )}
-            </div>
-          </div>
-          <p>{p.desc}</p>
-          <div className="chips">
-            {p.tags.map((t, i) => (<span className="chip" key={i}>{t}</span>))}
-          </div>
-        </div>
-      );
-
-      // init
-      mountContent();
-    </script>
-  </body>
-</html>
+          <a href="#
