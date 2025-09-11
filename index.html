@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
     <style>
-      /* (Các styles của bạn giữ nguyên) */
+      /* Các style vẫn giữ nguyên */
     </style>
   </head>
 
@@ -43,7 +43,28 @@
     </nav>
 
     <main id="home" class="container">
-      <!-- (Các section của bạn giữ nguyên) -->
+      <!-- HERO -->
+      <section class="hero reveal">
+        <div>
+          <div class="eyebrow" id="eyebrow">IoT / Embedded</div>
+          <h1 id="headline">
+            <span id="iAm">I'm</span> <span class="accent-1" id="nameAccent">Nguyen Van Thanh</span>, an
+            <span class="accent-2">Embedded Software Engineer</span> building <span class="accent-3">secure</span> devices.
+          </h1>
+          <p class="lead" id="lead">Embedded Software Engineer focusing on Embedded Linux, RTOS/FreeRTOS, and Modern C/C++ (C++11+) on STM32/ESP32/PIC; comfortable with Makefile, CMake, and unit testing (GoogleTest).</p>
+          <div style="margin-top:1rem" class="row hero-cta">
+            <a class="btn" target="_blank" rel="noreferrer" id="ctaGithub" href="#" aria-label="GitHub profile">GitHub</a>
+            <a class="btn" target="_blank" rel="noreferrer" id="ctaLinkedin" href="#" aria-label="LinkedIn profile">LinkedIn</a>
+            <a class="btn" target="_blank" rel="noreferrer" id="ctaResume" href="/resume.pdf">Resume</a>
+            <a class="btn" id="ctaEmail" href="#" data-copy="email" aria-label="Copy email">Email</a>
+          </div>
+        </div>
+        <div class="avatar" aria-hidden>
+          <div class="ring">
+            <div class="inner"><img class="photo" id="avatarPhoto" src="https://raw.githubusercontent.com/Thanhlearningcode/MYCV/main/anh.jpg" alt="Portrait of Nguyễn Văn Thành" onerror="this.style.display='none'; document.getElementById('initials').style.display='grid';"/><div class="initials" id="initials" style="display:none">NVT</div></div>
+          </div>
+        </div>
+      </section>
 
       <!-- PROJECTS -->
       <section id="projects" class="reveal">
@@ -51,20 +72,21 @@
         <div class="filters" id="filters"></div>
         <div class="projects" id="projectsGrid"></div>
       </section>
-
-      <!-- (Các phần còn lại của website giữ nguyên) -->
-
     </main>
 
+    <!-- Footer -->
     <footer>
       <div class="container inner">Designed & Built by <span id="byName">Nguyen Van Thanh</span> • <span id="year"></span></div>
     </footer>
 
     <button class="btn totop" id="toTop" aria-label="Back to top">↑</button>
-
     <div class="toast" id="toast" role="status" aria-live="polite">Email copied!</div>
 
-    <!-- App Scripts -->
+    <!-- React + Babel for JSX -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -119,7 +141,7 @@
             tags: ['Robotics','CAN','STM32','Raspberry Pi'],
             repo: 'https://github.com/Thanhlearningcode/AGV_MOBILEROBOT',
             cover: '',
-            video: 'https://www.youtube.com/playlist?list=PLuLSa6UJU-JVPB2FamfjqBzRCuvz32bf4'  // Thêm link video
+            video: 'https://www.youtube.com/playlist?list=PLuLSa6UJU-JVPB2FamfjqBzRCuvz32bf4'  // Thêm video link
           },
           {
             title: 'Linux Chat (Pthreads + TCP/IP)',
@@ -162,8 +184,6 @@
           </div>
         </div>
       );
-
-      // (Các hàm khác giữ nguyên)
 
       // init
       mountContent();
