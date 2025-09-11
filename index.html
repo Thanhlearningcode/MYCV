@@ -136,34 +136,7 @@
       ::-webkit-scrollbar{width:10px}
       ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12); border-radius:999px}
       /* Responsive */
-      @media (max-width: 900px){
-        .hero{grid-template-columns:1fr; gap:1.2rem}
-        .avatar{justify-self:start}
-        .projects{grid-template-columns:1fr}
-        .tech{grid-template-columns:1fr}
-        .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
-        .stats{grid-template-columns:1fr}
-      }
-      @media (prefers-reduced-motion: reduce){
-        *{animation:none!important; transition:none!important}
-      }
-      /* Back to top */
-      .totop{position:fixed; right:16px; bottom:16px; opacity:0; transform:translateY(10px); transition:.25s; z-index:40}
-      .totop.show{opacity:1; transform:translateY(0)}
-      /* === Avatar size fix (prevent oversized image) === */
-      .avatar .inner{clip-path:circle(50% at 50% 50%);} /* hard-clip */
-      .avatar .photo{object-position:center;}
-      .avatar .ring{width:clamp(150px, 20vw, 230px) !important; aspect-ratio:1/1;}
-      @media (max-width:900px){ .avatar .ring{ width:180px !important; } }
-      /* Education timeline: hide dots/line */
-      #education .timeline::before{display:none}
-      #education .titem::before{display:none}
-      /* Education timeline: hide bullets/line completely */
-      #education .timeline::before{display:none !important}
-      #education .titem::before{display:none !important}
-      #education .titem{padding-left:0 !important}
-    </style>
-  </head>
+      @media (max-width: 900px){ .hero{grid-template-columns:1fr; gap:1.2rem} .avatar{justify-self:start} .projects{grid-template-columns:1fr} .tech{grid-template-columns:1fr} .grid-2,.grid-3,.grid-4{grid-template-columns:1fr} .stats{grid-template-columns:1fr} } @media (prefers-reduced-motion: reduce){ *{animation:none!important; transition:none!important} } /* Back to top */ .totop{position:fixed; right:16px; bottom:16px; opacity:0; transform:translateY(10px); transition:.25s; z-index:40} .totop.show{opacity:1; transform:translateY(0)} /* === Avatar size fix (prevent oversized image) === */ .avatar .inner{clip-path:circle(50% at 50% 50%);} /* hard-clip */ .avatar .photo{object-position:center;} .avatar .ring{width:clamp(150px, 20vw, 230px) !important; aspect-ratio:1/1;} @media (max-width:900px){ .avatar .ring{ width:180px !important; } } /* Education timeline: hide dots/line */ #education .timeline::before{display:none} #education .titem::before{display:none} /* Education timeline: hide bullets/line completely */ #education .timeline::before{display:none !important} #education .titem::before{display:none !important} #education .titem{padding-left:0 !important} </style> </head>
   <body>
     <a class="skip" href="#home">Bỏ qua nội dung</a>
     <nav aria-label="Primary">
@@ -172,4 +145,467 @@
         <div class="navlinks" role="navigation">
           <a href="#home" data-link>Home</a>
           <a href="#projects" data-link>Projects</a>
-          <a href="#
+          <a href="#about" data-link>About</a>
+          <a href="#education" data-link>Education</a>
+          <a href="#connect" data-link>Contact</a>
+          <button id="langBtn" class="lang-toggle" aria-label="Language toggle">VI</button>
+        </div>
+      </div>
+    </nav>
+    <main id="home" class="container">
+      <!-- HERO -->
+      <section class="hero reveal">
+        <div>
+          <div class="eyebrow" id="eyebrow">IoT / Embedded</div>
+          <h1 id="headline">
+            <span id="iAm">I'm</span>
+            <span class="accent-1" id="nameAccent">Nguyen Van Thanh</span>, an <span class="accent-2">Embedded Software Engineer</span> building <span class="accent-3">secure</span> devices.
+          </h1>
+          <p class="lead" id="lead">Embedded Software Engineer focusing on Embedded Linux, RTOS/FreeRTOS, and Modern C/C++ (C++11+) on STM32/ESP32/PIC; comfortable with Makefile, CMake, and unit testing (GoogleTest).</p>
+          <div style="margin-top:1rem" class="row hero-cta">
+            <a class="btn" target="_blank" rel="noreferrer" id="ctaGithub" href="#" aria-label="GitHub profile">GitHub</a>
+            <a class="btn" target="_blank" rel="noreferrer" id="ctaLinkedin" href="#" aria-label="LinkedIn profile">LinkedIn</a>
+            <a class="btn" target="_blank" rel="noreferrer" id="ctaResume" href="/resume.pdf">Resume</a>
+            <a class="btn" id="ctaEmail" href="#" data-copy="email" aria-label="Copy email">Email</a>
+          </div>
+        </div>
+        <div class="avatar" aria-hidden>
+          <div class="ring">
+            <div class="inner"><img class="photo" id="avatarPhoto" src="https://raw.githubusercontent.com/Thanhlearningcode/MYCV/main/anh.jpg" alt="Portrait of Nguyễn Văn Thành" onerror="this.style.display='none'; document.getElementById('initials').style.display='grid';"/><div class="initials" id="initials" style="display:none">NVT</div></div>
+          </div>
+        </div>
+      </section>
+      <!-- STATS -->
+      <section class="reveal" aria-label="Stats">
+        <div class="section-title">Public Footprint</div>
+        <div class="stats">
+          <div class="stat">
+            <div class="tmeta">GitHub Followers</div>
+            <div id="sFollowers" class="num skeleton">&nbsp;</div>
+          </div>
+          <div class="stat">
+            <div class="tmeta">Public Repos</div>
+            <div id="sRepos" class="num skeleton">&nbsp;</div>
+          </div>
+          <div class="stat">
+            <div class="tmeta">Total Stars</div>
+            <div id="sStars" class="num skeleton">&nbsp;</div>
+          </div>
+        </div>
+      </section>
+      <!-- ABOUT -->
+      <section id="about" class="reveal">
+        <div class="section-title">About Me</div>
+        <div class="grid grid-2">
+          <div class="card pad about">
+            <p id="aboutP1">Passionate embedded systems engineer focusing on robust IoT solutions: low-level firmware, real-time systems, and secure device-to-cloud connectivity.</p>
+            <p id="aboutP2">I enjoy building with FreeRTOS, and modern C/C++ on ESP32. Lately, I'm exploring MQTT, OTA updates, and energy-efficient designs.</p>
+          </div>
+          <div class="card pad">
+            <div class="timeline">
+              <div class="titem">
+                <h4>D‑SOFT — Embedded Linux/C++ Intern</h4>
+                <div class="tmeta">2025</div>
+                <div>Learned Embedded Linux fundamentals; Modern C++, shell/Python scripts, and CMake; practiced Git.</div>
+              </div>
+              <div class="titem">
+                <h4>BKTECH Lab — Virtual STM32 & Custom RTOS</h4>
+                <div class="tmeta">2023–2024</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- LANGUAGES -->
+      <section id="languages" class="reveal">
+        <div class="section-title">Languages & Certifications</div>
+        <div class="grid grid-3">
+          <div class="card pad">
+            <div class="tmeta">English</div>
+            <div class="num">TOEIC 800</div>
+          </div>
+          <div class="card pad">
+            <div class="tmeta">Japanese</div>
+            <div class="num">N5</div>
+          </div>
+          <div class="card pad">
+            <div class="tmeta">Education Classification</div>
+            <div>Good</div>
+          </div>
+        </div>
+      </section>
+      <!-- EDUCATION -->
+      <section id="education" class="reveal">
+        <div class="section-title">Education</div>
+        <div class="card pad">
+          <div class="timeline">
+            <div class="titem">
+              <h4>Da Nang University of Science and Technology</h4>
+              <div class="tmeta">2021–2026</div>
+              <div>Mechatronics Engineering — <strong>Good</strong>. Degree: <em>Bachelor of Engineering</em>.</div>
+            </div>
+            <div class="titem">
+              <h4>HALA ACADEMY</h4>
+              <div class="tmeta">07/2024 – 12/2024</div>
+              <div>Automotive</div>
+            </div>
+            <div class="titem">
+              <h4>DEVLINUX ACADEMY</h4>
+              <div class="tmeta">11/2024 – 12/2025</div>
+              <div>Linux Embedded, S32K‑MCU</div>
+            </div>
+            <div class="titem">
+              <h4>HOME ENGLISH</h4>
+              <div class="tmeta">07/2024 – 05/2025</div>
+              <div>B1 / Pre‑B2 Communication</div>
+            </div>
+            <div class="titem">
+              <h4>KOHI</h4>
+              <div class="tmeta">09/2025 – 02/2026</div>
+              <div>N4</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- TECH -->
+      <section class="reveal">
+        <div class="section-title">Core Technologies</div>
+        <div class="tech" id="techGrid"></div>
+      </section>
+      <!-- PROJECTS -->
+      <section id="projects" class="reveal">
+        <div class="section-title">Featured Projects</div>
+        <div class="filters" id="filters"></div>
+        <div class="projects" id="projectsGrid"></div>
+      </section>
+      <!-- CONNECT -->
+      <section id="connect" class="reveal">
+        <div class="section-title">Connect</div>
+        <div class="card pad between">
+          <div class="muted">Let's connect for collaboration or opportunities.</div>
+          <div class="row">
+            <a class="btn" target="_blank" rel="noreferrer" id="footerGithub" href="#">GitHub</a>
+            <a class="btn" target="_blank" rel="noreferrer" id="footerLinkedin" href="#">LinkedIn</a>
+            <a class="btn" target="_blank" rel="noreferrer" id="footerResume" href="/resume.pdf">Resume</a>
+            <a class="btn" id="footerEmail" href="#" data-copy="email">Email</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="container inner">Designed & Built by <span id="byName">Nguyen Van Thanh</span> • <span id="year"></span></div>
+    </footer>
+    <button class="btn totop" id="toTop" aria-label="Back to top">↑</button>
+    <div class="toast" id="toast" role="status" aria-live="polite">Email copied!</div>
+    <!-- React (UMD) + Babel for JSX-in-HTML -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- App Scripts -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Nguyen Van Thanh",
+        "jobTitle": "Embedded Software Engineer",
+        "url": "https://thanhlearningcode.github.io/",
+        "sameAs": [
+          "https://github.com/Thanhlearningcode",
+          "https://www.linkedin.com/in/thanh76bk/"
+        ]
+      }
+    </script>
+    <script type="text/babel">
+      // === Editable configuration ===
+      const CONFIG = {
+        name: 'Nguyen Van Thanh',
+        initials: 'NVT',
+        title: 'Embedded Software Engineer',
+        email: 'thanhnguyen67bk@gmail.com',
+        github: 'https://github.com/Thanhlearningcode',
+        linkedin: 'https://www.linkedin.com/in/thanh76bk/',
+        avatar: 'https://raw.githubusercontent.com/Thanhlearningcode/MYCV/main/anh.jpg',
+        resume: '/resume.pdf',
+        hero: 'Proud of my passion for Embedded Systems, skilled in Bare‑metal, Embedded Linux, Automotive Embedded, RTOS, C/C++/Python, and Android Embedded; I\'m confident I\'ll become an expert someday!',
+        about1: 'Mechatronics student at Da Nang University of Science and Technology (2021–2026). Passionate about building reliable, real‑time firmware, driver libraries, and device‑to‑device communications.',
+        about2: 'Hands‑on with SPI, I2C, UART, CAN; Linux IPC (pipes, sockets, message queues); and tools like KeilC, S32DS, Qt. Internship at D‑SOFT (Embedded Linux/C++), Embedded Lab at BKTECH (virtual STM32, custom RTOS).',
+        technologies: [
+          { icon: 'code', label: 'Programming', sub: 'C/C++' },
+          { icon: 'term', label: 'Embedded Linux', sub: 'Yocto, Programming, Modules' },
+          { icon: 'rtos', label: 'RTOS/FreeRTOS', sub: 'Tasks • Queues • Semaphores,...' },
+          { icon: 'chip', label: 'Microcontrollers', sub: 'NXP (i.MX 8M, S32K144), STM32, ESP32, PIC, Raspberry Pi' },
+          { icon: 'mqtt', label: 'Protocols', sub: 'SPI • I2C • UART • CAN' },
+          { icon: 'term', label: 'Debugging & Analysis', sub: 'GDB • AddressSanitizer • Analyzers,...' }
+        ],
+        projects: [
+          { title: 'Virtual STM32 Simulation (ARM Cortex‑M3)', desc: 'Virtual model of STM32 (CPU core, buses, GPIO, DMA, UART/SPI, memory‑mapped registers) enabling firmware tests without hardware; Python test scripts; CI‑friendly.', tags: ['C++','Emulation','Testing'], repo: 'https://github.com/Thanhlearningcode/VirtualPlatformSTM32', cover: '', },
+          { title: 'STM32 Driver Library & Custom RTOS', desc: 'Lightweight preemptive RTOS (scheduler, semaphores, mutexes) and STM32 driver library in C using design patterns; automated build/test with Makefile & Bash.', tags: ['C','RTOS','KeilC'], repo: 'https://github.com/Thanhlearningcode/STM32', cover: '', },
+          { title: 'AGV — Mobile Robot using ROS (PBL)', desc: 'Project lead for 2‑person team; BTS7960 motor driver, encoder feedback, CAN‑based control; real‑time communication with RTOS.', tags: ['Robotics','CAN','STM32','Raspberry Pi'], repo: 'https://github.com/Thanhlearningcode/AGV_MOBILEROBOT', cover: '', },
+          { title: 'Linux Chat (Pthreads + TCP/IP)', desc: 'Multi‑client chat server and CLI client: concurrent connections via POSIX threads & mutexes, command‑based protocol, thread‑safe messaging; Makefile build; Valgrind checked.', tags: ['Networking','C','Sockets'], repo: 'https://github.com/Thanhlearningcode/Chat-Application_MiniProject', cover: '', },
+          { title: 'SMART PARKING (PIC + C#)', desc: 'RFID‑based authentication with real‑time logging; servo barrier with SPI SD‑card storage; C# monitoring app.', tags: ['PIC','RFID','C#'], repo: 'https://github.com/Thanhlearningcode/SMART-PARKING', cover: '', }
+        ]
+      };
+      // === Simple inline icons ===
+      const Icon = ({ name, size = 18 }) => {
+        const common = { width: size, height: size, fill: 'none', stroke: '#cfe3ff', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' };
+        switch (name) {
+          case 'code': return (<svg {...common} viewBox="0 0 24 24" aria-hidden><path d="M8 9l-3 3 3 3M16 9l3 3-3 3" /></svg>);
+          case 'term': return (<svg {...common} viewBox="0 0 24 24" aria-hidden><path d="M4 4h16v16H4z" /><path d="M7 9l2 2-2 2M11 13h6" /></svg>);
+          case 'rtos': return (<svg {...common} viewBox="0 0 24 24" aria-hidden><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06A1.65 1.65 0 0 0 15 19.4 1.65 1.65 0 0 0 13.35 20H10.65A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82-.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15 1.65 1.65 0 0 0 4 13.35V10.65A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06A2 2 0 1 1 7.04 4.3l.06.06A1.65 1.65 0 0 0 9 4.6 1.65 1.65 0 0 0 10.65 4h2.7A1.65 1.65 0 0 0 15 4.6a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9c.25.5.4 1.07.4 1.65v1.7c0 .58-.15 1.15-.4 1.65z" /></svg>);
+          case 'mqtt': return (<svg {...common} viewBox="0 0 24 24" aria-hidden><path d="M4 14a8 8 0 0 1 8-8M4 10a12 12 0 0 1 12 12M4 6a16 16 0 0 1 16 16" /></svg>);
+          case 'chip': return (<svg {...common} viewBox="0 0 24 24" aria-hidden><rect x="6" y="6" width="12" height="12" rx="2" /><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3" /></svg>);
+          case 'bolt': return (<svg {...common} viewBox="0 0 24 24" aria-hidden><path d="M13 3L4 14h7l-1 7 9-11h-7l1-7z" /></svg>);
+          case 'github': return (<svg {...common} viewBox="0 0 24 24" aria-hidden><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.1-1.46-1.1-1.46-.9-.62.07-.6.07-.6 1 .07 1.52 1.04 1.52 1.04.9 1.55 2.36 1.1 2.94.84.09-.65.35-1.1.64-1.35-2.22-.25-4.56-1.11-4.56-4.92 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.28.1-2.66 0 0 .85-.27 2.8 1.02A9.7 9.7 0 0 1 12 6.8c.86 0 1.73.12 2.54.34 1.94-1.29 2.79-1.02 2.79-1.02.55 1.38.2 2.41.1 2.66.64.7 1.03 1.59 1.03 2.68 0 3.82-2.34 4.66-4.57 4.91.36.31.68.92.68 1.86v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2z" /></svg>);
+          case 'link': return (<svg {...common} viewBox="0 0 24 24" aria-hidden><path d="M10 13a5 5 0 0 0 7.07 0l1.76-1.76a5 5 0 1 0-7.07-7.07L10 5m4 4l-4 4" /></svg>);
+          default: return null;
+        }
+      };
+
+      const TechItem = ({ icon, label, sub }) => (
+        <div className="item">
+          <div className="icon"><Icon name={icon} /></div>
+          <div>
+            <div className="label">{label}</div>
+            <div className="sub">{sub}</div>
+          </div>
+        </div>
+      );
+
+      const ProjectCard = ({ p }) => (
+        <div className="card pad project" data-tags={p.tags.join(',')}>
+          <div className="cover">{p.cover ? <img alt="cover" src={p.cover} style={{maxWidth:'100%',maxHeight:'100%',borderRadius:'12px'}}/> : <span>Project Preview</span>}</div>
+          <div className="between" style={{marginTop:'.5rem'}}>
+            <h3>{p.title}</h3>
+            <div className="row">
+              <a className="btn" href={p.repo} target="_blank" rel="noreferrer" title="GitHub repo"><Icon name="github" /> Repo</a>
+              {p.live && <a className="btn" href={p.live} target="_blank" rel="noreferrer" title="Live Demo"><Icon name="link" /> Live</a>}
+            </div>
+          </div>
+          <p>{p.desc}</p>
+          <div className="chips">
+            {p.tags.map((t, i) => (<span className="chip" key={i}>{t}</span>))}
+          </div>
+        </div>
+      );
+
+      // Render tech & projects
+      function mountContent(){
+        document.getElementById('nameAccent').textContent = CONFIG.name;
+        document.getElementById('byName').textContent = CONFIG.name;
+        document.getElementById('initials').textContent = CONFIG.initials;
+        const av = document.getElementById('avatarPhoto');
+        if(av && CONFIG.avatar){
+          av.src = CONFIG.avatar;
+        }
+        document.getElementById('lead').textContent = CONFIG.hero;
+        document.getElementById('aboutP1').textContent = CONFIG.about1;
+        document.getElementById('aboutP2').textContent = CONFIG.about2;
+        document.getElementById('ctaGithub').href = CONFIG.github;
+        document.getElementById('footerGithub').href = CONFIG.github;
+        document.getElementById('ctaLinkedin').href = CONFIG.linkedin;
+        document.getElementById('footerLinkedin').href = CONFIG.linkedin;
+        document.getElementById('ctaResume').href = CONFIG.resume || '#';
+        document.getElementById('footerResume').href = CONFIG.resume || '#';
+
+        // email copy buttons
+        document.getElementById('ctaEmail').dataset.email = CONFIG.email;
+        document.getElementById('footerEmail').dataset.email = CONFIG.email;
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const techRoot = document.getElementById('techGrid');
+        const projRoot = document.getElementById('projectsGrid');
+        ReactDOM.render(<>{CONFIG.technologies.map((t,i) => (<TechItem key={i} {...t} />))}</>, techRoot);
+        ReactDOM.render(<>{CONFIG.projects.map((p,i) => (<ProjectCard key={i} p={p} />))}</>, projRoot);
+        buildFilters();
+      }
+
+      // Build filters from tags
+      function buildFilters(){
+        const allTags = new Set();
+        CONFIG.projects.forEach(p => p.tags.forEach(t => allTags.add(t)));
+        const filters = ['All', ...Array.from(allTags)];
+        const root = document.getElementById('filters');
+        root.innerHTML = '';
+        filters.forEach((f, idx) => {
+          const el = document.createElement('button');
+          el.className = 'pill' + (idx===0?' active':'');
+          el.textContent = f;
+          el.addEventListener('click', () => applyFilter(f, el));
+          root.appendChild(el);
+        });
+      }
+
+      function applyFilter(filter, el){
+        document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+        el.classList.add('active');
+        const cards = document.querySelectorAll('#projectsGrid .project');
+        cards.forEach(card => {
+          if(filter==='All'){
+            card.style.display='flex';
+            return;
+          }
+          const tags = (card.getAttribute('data-tags')||'').split(',');
+          card.style.display = tags.includes(filter)?'flex':'none';
+        });
+      }
+
+      // Language toggle (VI/EN)
+      const STRINGS = {
+        vi: {
+          eyebrow: 'IoT / Embedded',
+          home: 'Trang chủ',
+          about: 'Giới thiệu',
+          core: 'Công nghệ cốt lõi',
+          feat: 'Dự án tiêu biểu',
+          connect: 'Kết nối',
+          heroPrefix: 'Tôi là',
+          emailCopied: 'Đã copy email!'
+        },
+        en: {
+          eyebrow: 'IoT / Embedded',
+          home: 'Home',
+          about: 'About Me',
+          core: 'Core Technologies',
+          feat: 'Featured Projects',
+          connect: 'Connect',
+          heroPrefix: "I'm",
+          emailCopied: 'Email copied!'
+        }
+      };
+
+      function setLang(lang){
+        const s = STRINGS[lang];
+        document.querySelector('#eyebrow').textContent = s.eyebrow;
+        document.querySelector('nav .navlinks a[href="#home"]').textContent = s.home;
+        document.querySelector('nav .navlinks a[href="#about"]').textContent = s.about.replace('Me','');
+        document.querySelector('nav .navlinks a[href="#projects"]').textContent = (lang==='vi') ? 'Dự án' : 'Projects';
+        const eduAnchor = document.querySelector('nav .navlinks a[href="#education"]');
+        if(eduAnchor) eduAnchor.textContent = (lang==='vi') ? 'Học vấn' : 'Education';
+        document.querySelector('nav .navlinks a[href="#connect"]').textContent = (lang==='vi') ? 'Liên hệ' : 'Contact';
+        document.querySelector('#about .section-title').textContent = s.about;
+        document.querySelector('#projects .section-title').textContent = s.feat;
+        const eduTitle = document.querySelector('#education .section-title');
+        if(eduTitle) eduTitle.textContent = (lang==='vi') ? 'Học vấn' : 'Education';
+        document.querySelector('#connect .section-title').textContent = s.connect;
+        const iAm = document.getElementById('iAm');
+        if(iAm) iAm.textContent = s.heroPrefix;
+        document.getElementById('langBtn').textContent = lang.toUpperCase();
+        localStorage.setItem('lang', lang);
+        document.getElementById('toast').textContent = s.emailCopied;
+      }
+
+      // Active link highlight on scroll
+      function setupActiveLinks(){
+        const links = [...document.querySelectorAll('[data-link]')];
+        const sections = links.map(a => document.querySelector(a.getAttribute('href')));
+        const onScroll = () => {
+          const pos = window.scrollY + 90;
+          sections.forEach((sec, i) => {
+            if(!sec) return;
+            const top = sec.offsetTop, bottom = top + sec.offsetHeight;
+            const link = links[i];
+            if(pos >= top && pos < bottom){
+              links.forEach(l => l.classList.remove('active'));
+              link.classList.add('active');
+            }
+          });
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+      }
+
+      // Reveal on scroll
+      function setupReveal(){
+        const els = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if(e.isIntersecting){
+              e.target.classList.add('visible');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        els.forEach(el => io.observe(el));
+      }
+
+      // Copy email to clipboard with toast
+      function setupCopyEmail(){
+        function showToast(){
+          const t = document.getElementById('toast');
+          t.classList.add('show');
+          clearTimeout(window.__toastTimer);
+          window.__toastTimer = setTimeout(()=> t.classList.remove('show'), 1600);
+        }
+        document.querySelectorAll('[data-copy="email"]').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const email = e.currentTarget.dataset.email || CONFIG.email;
+            if(navigator.clipboard){
+              navigator.clipboard.writeText(email).then(showToast);
+            } else{
+              const ta = document.createElement('textarea');
+              ta.value = email;
+              document.body.appendChild(ta);
+              ta.select();
+              document.execCommand('copy');
+              ta.remove();
+              showToast();
+            }
+          });
+        });
+      }
+
+      // Back to top
+      function setupToTop(){
+        const b = document.getElementById('toTop');
+        window.addEventListener('scroll', () => {
+          if(window.scrollY > 480) b.classList.add('show');
+          else b.classList.remove('show');
+        }, { passive:true });
+        b.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+      }
+
+      // GitHub stats (followers/repos/stars)
+      async function setupStats(){
+        const user = 'Thanhlearningcode';
+        const set = (id, val) => {
+          const el = document.getElementById(id);
+          if(!el) return;
+          el.classList.remove('skeleton');
+          el.textContent = val;
+        };
+        try{
+          const u = await fetch(`https://api.github.com/users/${user}`);
+          const uj = await u.json();
+          set('sFollowers', uj.followers ?? '—');
+          set('sRepos', uj.public_repos ?? '—');
+        }catch(e){
+          set('sFollowers','—');
+          set('sRepos','—');
+        }
+        try{
+          const r = await fetch(`https://api.github.com/users/${user}/repos?per_page=100`);
+          const repos = await r.json();
+          const stars = Array.isArray(repos) ? repos.reduce((a,b)=>a+(b.stargazers_count||0),0) : '—';
+          set('sStars', stars);
+        }catch(e){
+          set('sStars','—');
+        }
+      }
+
+      // init
+      mountContent();
+      setupActiveLinks();
+      setupReveal();
+      setupCopyEmail();
+      setupToTop();
+      setupStats();
+      setLang(localStorage.getItem('lang') || 'vi');
+      document.getElementById('langBtn').addEventListener('click', () => {
+        const cur = document.getElementById('langBtn').textContent.trim().toLowerCase();
+        const next = cur === 'vi' ? 'en' : 'vi';
+        setLang(next);
+      });
+    </script>
+  </body>
+</html>
