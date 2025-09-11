@@ -136,7 +136,8 @@
       ::-webkit-scrollbar{width:10px}
       ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12); border-radius:999px}
       /* Responsive */
-      @media (max-width: 900px){ .hero{grid-template-columns:1fr; gap:1.2rem} .avatar{justify-self:start} .projects{grid-template-columns:1fr} .tech{grid-template-columns:1fr} .grid-2,.grid-3,.grid-4{grid-template-columns:1fr} .stats{grid-template-columns:1fr} } @media (prefers-reduced-motion: reduce){ *{animation:none!important; transition:none!important} } /* Back to top */ .totop{position:fixed; right:16px; bottom:16px; opacity:0; transform:translateY(10px); transition:.25s; z-index:40} .totop.show{opacity:1; transform:translateY(0)} /* === Avatar size fix (prevent oversized image) === */ .avatar .inner{clip-path:circle(50% at 50% 50%);} /* hard-clip */ .avatar .photo{object-position:center;} .avatar .ring{width:clamp(150px, 20vw, 230px) !important; aspect-ratio:1/1;} @media (max-width:900px){ .avatar .ring{ width:180px !important; } } /* Education timeline: hide dots/line */ #education .timeline::before{display:none} #education .titem::before{display:none} /* Education timeline: hide bullets/line completely */ #education .timeline::before{display:none !important} #education .titem::before{display:none !important} #education .titem{padding-left:0 !important} </style> </head>
+      @media (max-width: 900px){ .hero{grid-template-columns:1fr; gap:1.2rem} .avatar{justify-self:start} .projects{grid-template-columns:1fr} .tech{grid-template-columns:1fr} .grid-2,.grid-3,.grid-4{grid-template-columns:1fr} .stats{grid-template-columns:1fr} } @media (prefers-reduced-motion: reduce){ *{animation:none!important; transition:none!important} } /* Back to top */ .totop{position:fixed; right:16px; bottom:16px; opacity:0; transform:translateY(10px); transition:.25s; z-index:40} .totop.show{opacity:1; transform:translateY(0)} /* === Avatar size fix (prevent oversized image) === */ .avatar .inner{clip-path:circle(50% at 50% 50%);} /* hard-clip */ .avatar .photo{object-position:center;} .avatar .ring{width:clamp(150px, 20vw, 230px) !important; aspect-ratio:1/1;} @media (max-width:900px){ .avatar .ring{ width:180px !important; } } /* Education timeline: hide dots/line */ #education .timeline::before{display:none} #education .titem::before{display:none} /* Education timeline: hide bullets/line completely */ #education .timeline::before{display:none !important} #education .titem::before{display:none !important} #education .titem{padding-left:0 !important} </style>
+  </head>
   <body>
     <a class="skip" href="#home">Bỏ qua nội dung</a>
     <nav aria-label="Primary">
@@ -175,6 +176,7 @@
           </div>
         </div>
       </section>
+
       <!-- STATS -->
       <section class="reveal" aria-label="Stats">
         <div class="section-title">Public Footprint</div>
@@ -193,6 +195,7 @@
           </div>
         </div>
       </section>
+
       <!-- ABOUT -->
       <section id="about" class="reveal">
         <div class="section-title">About Me</div>
@@ -216,6 +219,7 @@
           </div>
         </div>
       </section>
+
       <!-- LANGUAGES -->
       <section id="languages" class="reveal">
         <div class="section-title">Languages & Certifications</div>
@@ -234,6 +238,7 @@
           </div>
         </div>
       </section>
+
       <!-- EDUCATION -->
       <section id="education" class="reveal">
         <div class="section-title">Education</div>
@@ -267,17 +272,31 @@
           </div>
         </div>
       </section>
+
       <!-- TECH -->
       <section class="reveal">
         <div class="section-title">Core Technologies</div>
         <div class="tech" id="techGrid"></div>
       </section>
+
       <!-- PROJECTS -->
       <section id="projects" class="reveal">
         <div class="section-title">Featured Projects</div>
         <div class="filters" id="filters"></div>
         <div class="projects" id="projectsGrid"></div>
       </section>
+
+      <!-- YouTube Playlist -->
+      <section id="youtubePlaylist" class="reveal">
+        <div class="section-title">YouTube Playlist</div>
+        <div class="card pad">
+          <p>Check out my YouTube playlist:</p>
+          <a href="https://www.youtube.com/playlist?list=PLuLSa6UJU-JVPB2FamfjqBzRCuvz32bf4" class="btn" target="_blank" rel="noreferrer">
+            View Playlist
+          </a>
+        </div>
+      </section>
+
       <!-- CONNECT -->
       <section id="connect" class="reveal">
         <div class="section-title">Connect</div>
@@ -292,9 +311,11 @@
         </div>
       </section>
     </main>
+
     <footer>
       <div class="container inner">Designed & Built by <span id="byName">Nguyen Van Thanh</span> • <span id="year"></span></div>
     </footer>
+
     <button class="btn totop" id="toTop" aria-label="Back to top">↑</button>
     <div class="toast" id="toast" role="status" aria-live="polite">Email copied!</div>
     <!-- React (UMD) + Babel for JSX-in-HTML -->
@@ -377,8 +398,8 @@
           <div className="between" style={{marginTop:'.5rem'}}>
             <h3>{p.title}</h3>
             <div className="row">
-              <a className="btn" href={p.repo} target="_blank" rel="noreferrer" title="GitHub repo"><Icon name="github" /> Repo</a>
-              {p.live && <a className="btn" href={p.live} target="_blank" rel="noreferrer" title="Live Demo"><Icon name="link" /> Live</a>}
+              <a class="btn" href={p.repo} target="_blank" rel="noreferrer" title="GitHub repo"><Icon name="github" /> Repo</a>
+              {p.live && <a class="btn" href={p.live} target="_blank" rel="noreferrer" title="Live Demo"><Icon name="link" /> Live</a>}
             </div>
           </div>
           <p>{p.desc}</p>
